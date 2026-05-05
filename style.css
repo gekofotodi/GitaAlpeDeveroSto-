@@ -32,6 +32,7 @@
 html,
 body {
     overscroll-behavior: none;
+    background-color: #000; /* Previene le fasce bianche ai bordi */
 }
 
 body {
@@ -47,15 +48,17 @@ body {
 body::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -5%;
+    left: -5%;
+    width: 110vw;
+    height: 110vh;
+    height: 110dvh; /* Copre oltre i bordi per compensare le barre di Safari/Chrome */
     background: linear-gradient(var(--bg-overlay), var(--bg-overlay)),
         url('./alpe_devero_bg.png') no-repeat center center;
     background-size: cover;
     opacity: 0.7;
     z-index: -1;
+    pointer-events: none; /* Impedisce che l'immagine catturi gli scroll */
 }
 
 /* Background Image Container */
@@ -88,7 +91,7 @@ body::before {
 /* Title Section */
 h1 {
     font-family: 'RightGrotesk-Wide', sans-serif;
-    font-size: clamp(3rem, 12vw, 7rem);
+    font-size: clamp(4.5rem, 15vw, 8rem); /* Made title larger on mobile and overall */
     font-weight: 500;
     text-transform: uppercase;
     line-height: 0.9;
@@ -105,19 +108,23 @@ h1 {
     will-change: transform, opacity;
 }
 
+.text-section section + section {
+    margin-top: 4.5rem; /* Increased distance between sections */
+}
+
 .text-section h2 {
     font-family: 'RightGrotesk-Wide', sans-serif;
     font-size: clamp(1.5rem, 4vw, 3rem);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
     line-height: 1.1;
 }
 
 .text-section p {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
-    margin-bottom: 2rem;
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem); /* Made text smaller */
+    margin-bottom: 1.5rem;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .text-section p:last-child {
@@ -126,11 +133,11 @@ h1 {
 
 .text-section ul {
     list-style-position: inside;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .text-section li {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem); /* Made text smaller */
     font-weight: 500;
     line-height: 1.4;
     margin-bottom: 0.8rem;
