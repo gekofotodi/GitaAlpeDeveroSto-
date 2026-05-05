@@ -12,12 +12,19 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'RightGrotesk-NarrowLight';
+    src: url('./PP Right Grotesk Display/PPRightGrotesk-NarrowLight.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
 :root {
     --primary-color: #99251c;
     --accent-color: #99251c;
     --accent-hover: #7a1d16;
-    --bg-overlay: rgba(0, 0, 0, 0.1);
-    /* Reduced overlay to let blend mode pop */
+    --bg-overlay: rgba(255, 255, 255, 0.3);
+    /* 40% black layer as requested */
     --text-shadow: none;
     /* Shadow might interfere with blend mode */
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -29,10 +36,15 @@
     box-sizing: border-box;
 }
 
-html,
+html {
+    overscroll-behavior: none;
+    background-color: #000;
+    /* Previene le fasce bianche ai bordi */
+}
+
 body {
     overscroll-behavior: none;
-    background-color: #000; /* Previene le fasce bianche ai bordi */
+    background-color: transparent;
 }
 
 body {
@@ -52,13 +64,15 @@ body::before {
     left: -5%;
     width: 110vw;
     height: 110vh;
-    height: 110dvh; /* Copre oltre i bordi per compensare le barre di Safari/Chrome */
-    background: linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-        url('./alpe_devero_bg.png') no-repeat center center;
+    height: 110dvh;
+    /* Copre oltre i bordi per compensare le barre di Safari/Chrome */
+    background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('alpe_devero_bg.png');
+    background-position: center center;
+    background-repeat: no-repeat;
     background-size: cover;
-    opacity: 0.7;
     z-index: -1;
-    pointer-events: none; /* Impedisce che l'immagine catturi gli scroll */
+    pointer-events: none;
+    /* Impedisce che l'immagine catturi gli scroll */
 }
 
 /* Background Image Container */
@@ -89,39 +103,117 @@ body::before {
 }
 
 /* Title Section */
+header {
+    display: inline-block;
+    max-width: 100%;
+}
+
 h1 {
-    font-family: 'RightGrotesk-Wide', sans-serif;
-    font-size: clamp(4.5rem, 15vw, 8rem); /* Made title larger on mobile and overall */
-    font-weight: 500;
-    text-transform: uppercase;
+    font-family: 'RightGrotesk-NarrowLight', sans-serif;
+    font-size: clamp(10.8rem, 36vw, 19.2rem);
+    /* Increased size by 60% from previous */
+    font-weight: 300;
+    text-transform: none;
+    /* Override global uppercase */
     line-height: 0.9;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    /* Let the subtitle handle the bottom margin */
+    animation: fadeInUp 0.8s ease-out;
+    will-change: transform, opacity;
+}
+
+.date-subtitle {
+    font-family: 'RightGrotesk-Wide', sans-serif;
+    font-size: clamp(1rem, 3.5vw, 2.5rem);
+    text-align: justify;
+    text-align-last: justify;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0;
+    /* Crucial for justify spacing */
+    font-weight: 600;
     animation: fadeInUp 0.8s ease-out;
     will-change: transform, opacity;
 }
 
 /* Sections */
 .text-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem 0;
     animation: fadeInUp 1s ease-out;
     text-align: left;
     will-change: transform, opacity;
 }
 
-.text-section section + section {
-    margin-top: 4.5rem; /* Increased distance between sections */
+.text-section>section {
+    width: 80vw;
+    max-width: 800px;
+    margin-bottom: 3rem;
+    text-align: center;
 }
 
-.text-section h2 {
+/* Accordion Styles */
+.accordion {
+    width: 80vw;
+    max-width: 800px;
+    border-top: 1px solid rgba(153, 37, 28, 0.4);
+    padding: 2rem 0;
+}
+
+.accordion summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+}
+
+.accordion summary::-webkit-details-marker {
+    display: none;
+    /* Hide default Safari arrow */
+}
+
+.accordion summary::after {
+    content: '▼';
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.accordion[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.accordion summary h2 {
     font-family: 'RightGrotesk-Wide', sans-serif;
     font-size: clamp(1.5rem, 4vw, 3rem);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
+    /* Let summary flex handle alignment */
     text-transform: uppercase;
     line-height: 1.1;
+    pointer-events: none;
+    /* Ensure clicks register on summary */
+}
+
+.accordion p,
+.accordion ul {
+    margin-top: 2rem;
+    /* Spacing when opened */
+}
+
+.accordion p a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .text-section p {
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem); /* Made text smaller */
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    /* Made text smaller */
     margin-bottom: 1.5rem;
     font-weight: 500;
     line-height: 1.3;
@@ -137,7 +229,8 @@ h1 {
 }
 
 .text-section li {
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem); /* Made text smaller */
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    /* Made text smaller */
     font-weight: 500;
     line-height: 1.4;
     margin-bottom: 0.8rem;
@@ -149,16 +242,28 @@ h1 {
 
 /* Buttons */
 .cta-button {
-    display: inline-block;
-    padding: 1.2rem 2.5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    /* Adjusted for potential shape proportions */
     background: var(--accent-color);
     color: white;
     text-decoration: none;
-    border-radius: 50px;
     font-weight: 600;
     font-size: 1.1rem;
     transition: var(--transition);
-    box-shadow: 0 4px 15px rgba(153, 37, 28, 0.3);
+
+    /* Shape using the asset */
+    -webkit-mask-image: url('track.png');
+    mask-image: url('track.png');
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+
+    /* Using drop-shadow so the shadow follows the mask shape, not a box */
+    filter: drop-shadow(0 4px 8px rgba(153, 37, 28, 0.4));
     text-transform: uppercase;
     letter-spacing: 1px;
     animation: fadeInUp 0.9s ease-out;
@@ -168,7 +273,7 @@ h1 {
 .cta-button:hover {
     background: var(--accent-hover);
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(153, 37, 28, 0.5);
+    filter: drop-shadow(0 6px 15px rgba(153, 37, 28, 0.6));
 }
 
 /* Animations */
@@ -197,4 +302,16 @@ h1 {
     .content-wrapper {
         gap: 1.5rem;
     }
+}
+
+/* Croquet Footer Image */
+.croquet-footer {
+    position: relative; /* Scrolls naturally with the page */
+    display: block;
+    width: 100vw;
+    object-fit: contain; /* Keeps its proportions while spanning 100% width */
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+    z-index: 5;
+    margin-top: 2rem; /* Spacing from the content above */
 }
