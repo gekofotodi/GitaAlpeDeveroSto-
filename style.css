@@ -125,6 +125,22 @@ h1 {
     margin-bottom: 0;
 }
 
+.text-section ul {
+    list-style-position: inside;
+    margin-bottom: 2rem;
+}
+
+.text-section li {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+}
+
+.text-section strong {
+    font-weight: 900;
+}
+
 /* Buttons */
 .cta-button {
     display: inline-block;
