@@ -38,8 +38,7 @@
 
 html {
     overscroll-behavior: none;
-    background-color: #000;
-    /* Previene le fasce bianche ai bordi */
+    background-color: transparent;
 }
 
 body {
@@ -60,19 +59,16 @@ body {
 body::before {
     content: '';
     position: fixed;
-    top: -5%;
-    left: -5%;
-    width: 110vw;
-    height: 110vh;
-    height: 110dvh;
-    /* Copre oltre i bordi per compensare le barre di Safari/Chrome */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('alpe_devero_bg.png');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     z-index: -1;
     pointer-events: none;
-    /* Impedisce che l'immagine catturi gli scroll */
 }
 
 /* Background Image Container */
