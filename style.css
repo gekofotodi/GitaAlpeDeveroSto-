@@ -69,10 +69,9 @@ body::before {
     /* Usa svh per adattarsi all'altezza al netto dei comandi di Safari */
     height: 100dvh;
     background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('alpe_devero_bg.png');
-    background-position: center top;
+    background-position: center center;
     background-repeat: no-repeat;
-    background-size: auto 100%;
-    /* Altezza 100%, larghezza proporzionale */
+    background-size: cover;
     z-index: -1;
     pointer-events: none;
 }
