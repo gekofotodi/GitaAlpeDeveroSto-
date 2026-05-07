@@ -63,7 +63,8 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    height: 100svh; /* Usa svh per adattarsi all'altezza al netto dei comandi di Safari */
+    height: 100svh;
+    /* Usa svh per adattarsi all'altezza al netto dei comandi di Safari */
     height: 100dvh;
     background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('alpe_devero_bg.png');
     background-position: center center;
@@ -304,15 +305,19 @@ h1 {
 
 /* Croquet Footer Image */
 .croquet-footer {
-    position: relative; /* Scrolls naturally with the page */
+    position: relative;
+    /* Scrolls naturally with the page */
     display: block;
     width: 100vw;
-    object-fit: contain; /* Keeps its proportions while spanning 100% width */
+    object-fit: contain;
+    /* Keeps its proportions while spanning 100% width */
     mix-blend-mode: hard-light;
     pointer-events: none;
     z-index: 5;
-    margin-top: 2rem; /* Spacing from the content above */
-    margin-bottom: 2rem; /* Spacing before the new footer */
+    margin-top: 2rem;
+    /* Spacing from the content above */
+    margin-bottom: 2rem;
+    /* Spacing before the new footer */
 }
 
 /* Site Footer */
