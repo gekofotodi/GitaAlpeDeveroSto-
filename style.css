@@ -312,5 +312,34 @@ h1 {
     pointer-events: none;
     z-index: 5;
     margin-top: 2rem; /* Spacing from the content above */
-    margin-bottom: calc(4rem + env(safe-area-inset-bottom)); /* Previene la copertura dai comandi del browser in basso */
+    margin-bottom: 2rem; /* Spacing before the new footer */
+}
+
+/* Site Footer */
+.site-footer {
+    width: 100%;
+    background-color: #99251c;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem calc(2rem + env(safe-area-inset-bottom));
+    position: relative;
+    z-index: 10;
+}
+
+.site-footer a {
+    color: white;
+    text-decoration: none;
+    font-family: 'RightGrotesk-Wide', sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+.site-footer a:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
 }
