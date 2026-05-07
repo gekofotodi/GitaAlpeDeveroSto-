@@ -38,12 +38,14 @@
 
 html {
     overscroll-behavior: none;
-    background-color: transparent;
+    background-color: #99251c;
+    /* Colore base visibile dove body e foto non arrivano */
 }
 
 body {
     overscroll-behavior: none;
     background-color: transparent;
+    /* Deve essere trasparente per non coprire body::before (la foto) */
 }
 
 body {
@@ -67,9 +69,10 @@ body::before {
     /* Usa svh per adattarsi all'altezza al netto dei comandi di Safari */
     height: 100dvh;
     background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url('alpe_devero_bg.png');
-    background-position: center center;
+    background-position: center top;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto 100%;
+    /* Altezza 100%, larghezza proporzionale */
     z-index: -1;
     pointer-events: none;
 }
